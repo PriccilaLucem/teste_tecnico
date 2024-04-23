@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
-import { CatsController } from './controllers/user_controller';
+import { UserController } from './controllers/user_controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './controllers/entities/user.entity';
+import { User } from './entities/user.entity';
 import { config } from 'dotenv';
+import { Movie } from './entities/movies.entity';
+import { LoginController } from './controllers/login_controller';
+import { MovieController } from './controllers/movies_controller';
 
 config();
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -16,11 +18,11 @@ config();
       username: process.env.USER,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: [User],
+      entities: [User, Movie],
       synchronize: false, //mudar isso depoiss
     }),
   ],
-  controllers: [CatsController],
+  controllers: [UserController, LoginController, MovieController],
   providers: [AppService],
 })
 export class AppModule {}
