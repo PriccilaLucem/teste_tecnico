@@ -1,12 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppService } from './app.service';
-import { UserController } from './controllers/user_controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
+import { UsersModule } from './user/user.module';
+import { User } from './user/user.entity';
 import { config } from 'dotenv';
 import { Movie } from './entities/movies.entity';
-import { LoginController } from './controllers/login_controller';
-import { MovieController } from './controllers/movies_controller';
 
 config();
 @Module({
@@ -19,10 +16,9 @@ config();
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
       entities: [User, Movie],
-      synchronize: false, //mudar isso depoiss
+      synchronize: true,
     }),
+    UsersModule,
   ],
-  controllers: [UserController, LoginController, MovieController],
-  providers: [AppService],
 })
 export class AppModule {}
