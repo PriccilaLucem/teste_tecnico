@@ -1,6 +1,6 @@
 import { Controller, Post } from '@nestjs/common';
 
-@Controller('user')
+@Controller('login')
 export class CatsController {
   @Post()
   findAll(): string {

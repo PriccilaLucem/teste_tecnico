@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CatsController } from './controllers/user_controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './controllers/entities/user.entity';
 import { config } from 'dotenv';
 
 config();
@@ -15,6 +16,7 @@ config();
       username: process.env.USER,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
+      entities: [User],
       synchronize: false, //mudar isso depoiss
     }),
   ],
