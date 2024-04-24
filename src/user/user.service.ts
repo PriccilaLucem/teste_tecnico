@@ -3,7 +3,7 @@ import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserDto } from 'src/user/interface/user.interface';
-import { User } from 'src/user/user.entity';
+import { User } from './user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -22,7 +22,9 @@ export class UserService {
 
   async login(loginData: UserDto): Promise<string> {
     const { email, password } = loginData;
-    const user = await this.userRepository.findOneBy({ email: email });
+    const user = await this.userRepository.findOne({
+      where: { email: email },
+    });
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
