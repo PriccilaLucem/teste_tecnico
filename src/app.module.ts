@@ -1,10 +1,16 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './user/user.module';
 import { User } from './user/user.entity';
 import { config } from 'dotenv';
 import { Movie } from './movies/movies.entity';
 import { MoviesModule } from './movies/movie.module';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 
 config();
 @Module({
@@ -23,4 +29,10 @@ config();
     MoviesModule,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: 'movie*', method: RequestMethod.ALL });
+  }
+}
