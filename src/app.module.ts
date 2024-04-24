@@ -17,14 +17,14 @@ config();
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'postgres',
       port: 5432,
-      username: process.env.USER,
-      password: process.env.PASSWORD,
-      database: process.env.DATABASE,
+      username: 'postgres',
+      password: 'postgres',
       entities: [User, Movie],
       synchronize: true,
     }),
+
     UsersModule,
     MoviesModule,
   ],
