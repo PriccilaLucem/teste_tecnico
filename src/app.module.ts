@@ -3,7 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './user/user.module';
 import { User } from './user/user.entity';
 import { config } from 'dotenv';
-import { Movie } from './entities/movies.entity';
+import { Movie } from './movies/movies.entity';
+import { MoviesModule } from './movies/movie.module';
 
 config();
 @Module({
@@ -19,6 +20,7 @@ config();
       synchronize: true,
     }),
     UsersModule,
+    MoviesModule,
   ],
 })
 export class AppModule {}

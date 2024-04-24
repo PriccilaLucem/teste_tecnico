@@ -5,7 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserDto } from 'src/user/interface/user.interface';
 import { User } from 'src/user/user.entity';
 import { Repository } from 'typeorm';
-// import { config } from 'dotenv';
 
 @Injectable()
 export class UserService {
