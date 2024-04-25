@@ -56,6 +56,9 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+
+# docker
+$ sudo docker-compose up
 ```
 
 ## Support
